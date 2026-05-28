@@ -1,149 +1,152 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Linux Handbuch</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-  <div class="scanline"></div>
+  <div class="noise"></div>
 
   <header>
-    <div class="header-inner">
-      <div class="logo">
-        <span class="prompt">~$</span>
-        <span class="logo-text">linux<span class="accent">handbuch</span></span>
-      </div>
-      <nav>
-        <a href="#kapitel">Kapitel</a>
-        <a href="#ueber">Über</a>
-      </nav>
+    <div class="header-left">
+      <span class="header-tag">SBB-STYLE</span>
+      <span class="header-divider">|</span>
+      <span class="header-title">LINUX HANDBUCH</span>
+    </div>
+    <div class="header-right">
+      <span id="clock">00:00:00</span>
     </div>
   </header>
 
-  <main>
+  <section class="departures-board">
+    <div class="board-header">
+      <span>KAP.</span>
+      <span>THEMA</span>
+      <span>STATUS</span>
+      <span>GLEIS</span>
+    </div>
 
-    <section class="hero">
-      <div class="hero-bg-text">LINUX</div>
-      <div class="hero-content">
-        <p class="hero-label">// Euer Begleiter im Terminal</p>
-        <h1>Das Linux<br/><span class="accent">Handbuch</span></h1>
-        <p class="hero-sub">Von Einsteigern, für Einsteiger. Praxisnah, direkt und auf den Punkt.</p>
-        <a href="#kapitel" class="btn">Kapitel ansehen <span>↓</span></a>
-      </div>
-      <div class="hero-terminal">
-        <div class="terminal-bar">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
-          <span class="terminal-title">bash</span>
-        </div>
-        <div class="terminal-body">
-          <p><span class="t-prompt">user@linux:~$</span> <span class="t-cmd">cat willkommen.txt</span></p>
-          <p class="t-out">Willkommen im Linux Handbuch!</p>
-          <p class="t-out">Hier lernst du alles, was du</p>
-          <p class="t-out">als Einsteiger wissen musst.</p>
-          <p>&nbsp;</p>
-          <p><span class="t-prompt">user@linux:~$</span> <span class="t-cursor">▋</span></p>
-        </div>
-      </div>
-    </section>
+    <div class="board-row" data-index="0">
+      <span class="row-num flip" data-text="00">00</span>
+      <span class="row-title">Einleitung</span>
+      <span class="row-status status-ready">BEREIT</span>
+      <span class="row-track">A1</span>
+    </div>
+    <div class="board-row" data-index="1">
+      <span class="row-num flip" data-text="01">01</span>
+      <span class="row-title">Dateisystem &amp; Navigation</span>
+      <span class="row-status status-ready">BEREIT</span>
+      <span class="row-track">A2</span>
+    </div>
+    <div class="board-row" data-index="2">
+      <span class="row-num flip" data-text="02">02</span>
+      <span class="row-title">Benutzer &amp; Berechtigungen</span>
+      <span class="row-status status-progress">IN ARBEIT</span>
+      <span class="row-track">B1</span>
+    </div>
+    <div class="board-row" data-index="3">
+      <span class="row-num flip" data-text="03">03</span>
+      <span class="row-title">Texteditoren</span>
+      <span class="row-status status-progress">IN ARBEIT</span>
+      <span class="row-track">B2</span>
+    </div>
+    <div class="board-row" data-index="4">
+      <span class="row-num flip" data-text="04">04</span>
+      <span class="row-title">Paketverwaltung</span>
+      <span class="row-status status-wait">AUSSTEHEND</span>
+      <span class="row-track">C1</span>
+    </div>
+    <div class="board-row" data-index="5">
+      <span class="row-num flip" data-text="05">05</span>
+      <span class="row-title">Prozesse &amp; Systemverwaltung</span>
+      <span class="row-status status-wait">AUSSTEHEND</span>
+      <span class="row-track">C2</span>
+    </div>
+    <div class="board-row" data-index="6">
+      <span class="row-num flip" data-text="06">06</span>
+      <span class="row-title">Netzwerk</span>
+      <span class="row-status status-wait">AUSSTEHEND</span>
+      <span class="row-track">D1</span>
+    </div>
+    <div class="board-row" data-index="7">
+      <span class="row-num flip" data-text="07">07</span>
+      <span class="row-title">Shell Scripting</span>
+      <span class="row-status status-wait">AUSSTEHEND</span>
+      <span class="row-track">D2</span>
+    </div>
+  </section>
 
-    <section class="kapitel" id="kapitel">
-      <h2>Kapitel</h2>
-      <div class="kapitel-grid">
+  <section class="info-strip">
+    <div class="strip-block">
+      <span class="strip-label">PROJEKT</span>
+      <span class="strip-value">BBW / ZLI 2025</span>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-block">
+      <span class="strip-label">GRUPPE</span>
+      <span class="strip-value">3 PERSONEN</span>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-block">
+      <span class="strip-label">KAPITEL</span>
+      <span class="strip-value">8 TOTAL</span>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-block">
+      <span class="strip-label">PLATFORM</span>
+      <span class="strip-value">LINUX / BASH</span>
+    </div>
+  </section>
 
-        <a href="#" class="kapitel-card">
-          <span class="kapitel-num">00</span>
-          <div class="kapitel-info">
-            <h3>Einleitung</h3>
-            <p>Was ist Linux? Warum ist es relevant? Ein Überblick über Distributionen und den Einstieg.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="#" class="kapitel-card">
-          <span class="kapitel-num">01</span>
-          <div class="kapitel-info">
-            <h3>Dateisystem & Navigation</h3>
-            <p>Verzeichnisstruktur verstehen, im Terminal navigieren, Dateien verwalten.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="#" class="kapitel-card">
-          <span class="kapitel-num">02</span>
-          <div class="kapitel-info">
-            <h3>Benutzer & Berechtigungen</h3>
-            <p>Benutzer verwalten, Rechte vergeben und <code>chmod</code> richtig einsetzen.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="#" class="kapitel-card">
-          <span class="kapitel-num">03</span>
-          <div class="kapitel-info">
-            <h3>Texteditoren</h3>
-            <p>Nano und Vim im Terminal – Dateien bearbeiten ohne grafische Oberfläche.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="#" class="kapitel-card">
-          <span class="kapitel-num">04</span>
-          <div class="kapitel-info">
-            <h3>Paketverwaltung</h3>
-            <p>Software installieren, aktualisieren und entfernen mit <code>apt</code> und Co.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="#" class="kapitel-card">
-          <span class="kapitel-num">05</span>
-          <div class="kapitel-info">
-            <h3>Prozesse & Systemverwaltung</h3>
-            <p>Prozesse überwachen, starten, beenden und Systemressourcen im Blick behalten.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="#" class="kapitel-card">
-          <span class="kapitel-num">06</span>
-          <div class="kapitel-info">
-            <h3>Netzwerk</h3>
-            <p>Netzwerkinterfaces, IP-Adressen, Verbindungen prüfen und SSH nutzen.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="#" class="kapitel-card">
-          <span class="kapitel-num">07</span>
-          <div class="kapitel-info">
-            <h3>Shell Scripting</h3>
-            <p>Eigene Skripte schreiben, Abläufe automatisieren und die Shell wirklich nutzen.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-
-      </div>
-    </section>
-
-    <section class="ueber" id="ueber">
-      <div class="ueber-inner">
-        <p class="hero-label">// Über dieses Handbuch</p>
-        <h2>Warum dieses<br/><span class="accent">Handbuch?</span></h2>
-        <p>Dieses Handbuch ist im Rahmen eines Schulprojekts entstanden. Unser Ziel war es, kein trockenes Nachschlagewerk zu erstellen, sondern einen echten Begleiter für alle, die mit Linux anfangen.</p>
-      </div>
-    </section>
-
-  </main>
+  <section class="hero-text">
+    <div class="hero-big">LINUX</div>
+    <div class="hero-sub-block">
+      <p>Von Einsteigern,<br/>für Einsteiger.</p>
+      <p class="hero-desc">Praxisnah. Direkt. Auf den Punkt.<br/>Kein Bullshit, nur das was du wirklich brauchst.</p>
+    </div>
+  </section>
 
   <footer>
-    <span class="prompt">~$</span> Linux Handbuch — Schulprojekt 2025
+    <span>LINUX HANDBUCH — SCHULPROJEKT</span>
+    <span class="footer-mid">●</span>
+    <span>GITHUB PAGES</span>
+    <span class="footer-mid">●</span>
+    <span id="footer-date">2025</span>
   </footer>
+
+  <script>
+    // Live clock
+    function tick() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2,'0');
+      const m = String(now.getMinutes()).padStart(2,'0');
+      const s = String(now.getSeconds()).padStart(2,'0');
+      document.getElementById('clock').textContent = h+':'+m+':'+s;
+      document.getElementById('footer-date').textContent = now.getFullYear();
+    }
+    tick(); setInterval(tick, 1000);
+
+    // Split-flap flip animation on rows
+    const rows = document.querySelectorAll('.board-row');
+    rows.forEach((row, i) => {
+      setTimeout(() => {
+        row.classList.add('revealed');
+      }, 120 * i);
+    });
+
+    // Hover clatter effect on rows
+    rows.forEach(row => {
+      row.addEventListener('mouseenter', () => {
+        const num = row.querySelector('.row-num');
+        num.classList.add('flipping');
+        setTimeout(() => num.classList.remove('flipping'), 400);
+      });
+    });
+  </script>
 
 </body>
 </html>
