@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Linux Handbuch</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="scanline"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="prompt">~$</span>
+        <span class="logo-text">linux<span class="accent">handbuch</span></span>
+      </div>
+      <nav>
+        <a href="#kapitel">Kapitel</a>
+        <a href="#ueber">Über</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="hero-bg-text">LINUX</div>
+      <div class="hero-content">
+        <p class="hero-label">// Euer Begleiter im Terminal</p>
+        <h1>Das Linux<br/><span class="accent">Handbuch</span></h1>
+        <p class="hero-sub">Von Einsteigern, für Einsteiger. Praxisnah, direkt und auf den Punkt.</p>
+        <a href="#kapitel" class="btn">Kapitel ansehen <span>↓</span></a>
+      </div>
+      <div class="hero-terminal">
+        <div class="terminal-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="terminal-title">bash</span>
+        </div>
+        <div class="terminal-body">
+          <p><span class="t-prompt">user@linux:~$</span> <span class="t-cmd">cat willkommen.txt</span></p>
+          <p class="t-out">Willkommen im Linux Handbuch!</p>
+          <p class="t-out">Hier lernst du alles, was du</p>
+          <p class="t-out">als Einsteiger wissen musst.</p>
+          <p>&nbsp;</p>
+          <p><span class="t-prompt">user@linux:~$</span> <span class="t-cursor">▋</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="kapitel" id="kapitel">
+      <h2>Kapitel</h2>
+      <div class="kapitel-grid">
+
+        <a href="#" class="kapitel-card">
+          <span class="kapitel-num">00</span>
+          <div class="kapitel-info">
+            <h3>Einleitung</h3>
+            <p>Was ist Linux? Warum ist es relevant? Ein Überblick über Distributionen und den Einstieg.</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+        <a href="#" class="kapitel-card">
+          <span class="kapitel-num">01</span>
+          <div class="kapitel-info">
+            <h3>Dateisystem & Navigation</h3>
+            <p>Verzeichnisstruktur verstehen, im Terminal navigieren, Dateien verwalten.</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+        <a href="#" class="kapitel-card">
+          <span class="kapitel-num">02</span>
+          <div class="kapitel-info">
+            <h3>Benutzer & Berechtigungen</h3>
+            <p>Benutzer verwalten, Rechte vergeben und <code>chmod</code> richtig einsetzen.</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+        <a href="#" class="kapitel-card">
+          <span class="kapitel-num">03</span>
+          <div class="kapitel-info">
+            <h3>Texteditoren</h3>
+            <p>Nano und Vim im Terminal – Dateien bearbeiten ohne grafische Oberfläche.</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+        <a href="#" class="kapitel-card">
+          <span class="kapitel-num">04</span>
+          <div class="kapitel-info">
+            <h3>Paketverwaltung</h3>
+            <p>Software installieren, aktualisieren und entfernen mit <code>apt</code> und Co.</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+        <a href="#" class="kapitel-card">
+          <span class="kapitel-num">05</span>
+          <div class="kapitel-info">
+            <h3>Prozesse & Systemverwaltung</h3>
+            <p>Prozesse überwachen, starten, beenden und Systemressourcen im Blick behalten.</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+        <a href="#" class="kapitel-card">
+          <span class="kapitel-num">06</span>
+          <div class="kapitel-info">
+            <h3>Netzwerk</h3>
+            <p>Netzwerkinterfaces, IP-Adressen, Verbindungen prüfen und SSH nutzen.</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+        <a href="#" class="kapitel-card">
+          <span class="kapitel-num">07</span>
+          <div class="kapitel-info">
+            <h3>Shell Scripting</h3>
+            <p>Eigene Skripte schreiben, Abläufe automatisieren und die Shell wirklich nutzen.</p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+      </div>
+    </section>
+
+    <section class="ueber" id="ueber">
+      <div class="ueber-inner">
+        <p class="hero-label">// Über dieses Handbuch</p>
+        <h2>Warum dieses<br/><span class="accent">Handbuch?</span></h2>
+        <p>Dieses Handbuch ist im Rahmen eines Schulprojekts entstanden. Unser Ziel war es, kein trockenes Nachschlagewerk zu erstellen, sondern einen echten Begleiter für alle, die mit Linux anfangen.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span class="prompt">~$</span> Linux Handbuch — Schulprojekt 2025
+  </footer>
+
+</body>
+</html>
