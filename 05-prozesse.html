@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kapitel 05 · Prozesse — Linux Handbuch</title>
+  <link rel="stylesheet" href="chapter.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <header>
+    <div class="header-left">
+      <a href="index.html" class="header-tag header-tag--link">SBB-STYLE</a>
+      <span class="header-divider">|</span>
+      <span class="header-title">LINUX HANDBUCH</span>
+    </div>
+    <div class="header-right">
+      <span id="clock">00:00:00</span>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- ── SIDEBAR: Sprungliste der Befehle im Kapitel ── -->
+    <aside class="sidebar">
+      <div class="sidebar-kap">
+        <span class="sidebar-kap-num">05</span>
+        <span class="sidebar-kap-track">GLEIS B2</span>
+      </div>
+      <div class="sidebar-title">Prozesse</div>
+      <div class="sidebar-label">BEFEHLE</div>
+      <nav class="cmd-nav">
+        <a href="#ps" class="cmd-nav-item"><code>ps</code></a>
+        <a href="#top" class="cmd-nav-item"><code>top</code></a>
+        <a href="#htop" class="cmd-nav-item"><code>htop</code></a>
+        <a href="#kill" class="cmd-nav-item"><code>kill</code></a>
+        <a href="#jobs" class="cmd-nav-item"><code>jobs</code></a>
+        <a href="#bg" class="cmd-nav-item"><code>bg</code></a>
+        <a href="#fg" class="cmd-nav-item"><code>fg</code></a>
+        <a href="#nice" class="cmd-nav-item"><code>nice</code></a>
+        <a href="#renice" class="cmd-nav-item"><code>renice</code></a>
+        <a href="#nohup" class="cmd-nav-item"><code>nohup</code></a>
+        <a href="#pgrep" class="cmd-nav-item"><code>pgrep</code></a>
+        <a href="#pkill" class="cmd-nav-item"><code>pkill</code></a>
+        <a href="#watch" class="cmd-nav-item"><code>watch</code></a>
+      </nav>
+    </aside>
+
+    <!-- ── HAUPTINHALT ── -->
+    <main class="content">
+
+      <div class="chapter-hero">
+        <span class="chapter-hero-num">KAP. 05</span>
+        <h1 class="chapter-hero-title">Prozesse</h1>
+      </div>
+
+      <p class="chapter-intro">Jedes laufende Programm unter Linux ist ein Prozess. In diesem Kapitel lernt man, laufende Prozesse anzuzeigen, zu überwachen, in den Hintergrund zu verschieben und bei Bedarf zu beenden.</p>
+
+      <div class="cmd-list">
+      <article class="cmd-block" id="ps">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">ps</code>
+          <span class="cmd-block-index">01</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt eine Momentaufnahme der aktuell laufenden Prozesse an.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>ps [optionen]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>aux</code></td><td>Zeigt alle Prozesse aller Benutzer mit Details</td></tr>
+          <tr><td class="flag-cell"><code>-ef</code></td><td>Alternative Ansicht mit vollständigen Befehlszeilen</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>ps aux | grep firefox</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>elias  4821  2.1  3.4  firefox
+elias  4902  0.0  0.1  grep firefox</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>ps zeigt nur eine Momentaufnahme. Für eine laufend aktualisierte Ansicht eignet sich top oder htop besser.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="top">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">top</code>
+          <span class="cmd-block-index">02</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt laufende Prozesse live an, sortiert nach CPU-Auslastung, und aktualisiert sich laufend.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>top</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>P</code></td><td>In top selbst gedrückt: sortiert nach CPU-Auslastung</td></tr>
+          <tr><td class="flag-cell"><code>M</code></td><td>In top selbst gedrückt: sortiert nach Arbeitsspeicher</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>top</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Öffnet eine interaktive Übersicht aller Prozesse. Mit q beendet man top wieder.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>top ist auf jedem Linux-System vorinstalliert, wirkt aber etwas unübersichtlich. htop ist die moderne, farbige Alternative.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="htop">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">htop</code>
+          <span class="cmd-block-index">03</span>
+        </div>
+        <p class="cmd-block-desc">Eine übersichtlichere, farbige Version von top mit Mausunterstützung.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>htop</code>
+        </div>
+
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>htop</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Öffnet eine farbige, interaktive Prozessübersicht mit Balkendiagrammen für CPU und RAM. Mit F10 oder q beenden.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>htop muss meist zuerst installiert werden: sudo apt install htop. Danach lohnt es sich, top komplett zu ersetzen.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="kill">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">kill</code>
+          <span class="cmd-block-index">04</span>
+        </div>
+        <p class="cmd-block-desc">Beendet einen Prozess anhand seiner Prozess-ID (PID).</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>kill [pid]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-9</code></td><td>Erzwingt das sofortige Beenden (SIGKILL), auch bei hängenden Prozessen</td></tr>
+          <tr><td class="flag-cell"><code>-15</code></td><td>Sendet ein höfliches Beenden-Signal (Standard, SIGTERM)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>kill -9 4821</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Kein sichtbarer Output. Der Prozess mit der PID 4821 wird sofort beendet.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Die PID findet man z.B. mit ps aux oder top. kill -9 sollte man nur als letztes Mittel nutzen, da der Prozess keine Chance zum sauberen Beenden erhält.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="jobs">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">jobs</code>
+          <span class="cmd-block-index">05</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt alle Hintergrundprozesse (Jobs) an, die in der aktuellen Terminal-Sitzung gestartet wurden.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>jobs</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-l</code></td><td>Zeigt zusätzlich die Prozess-ID jedes Jobs an</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>jobs</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>[1]+  Läuft    sleep 300 &amp;</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>jobs zeigt nur Prozesse, die im aktuellen Terminal gestartet wurden, nicht alle Prozesse des Systems.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="bg">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">bg</code>
+          <span class="cmd-block-index">06</span>
+        </div>
+        <p class="cmd-block-desc">Setzt einen angehaltenen Prozess in den Hintergrund fort (background).</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>bg [job-nummer]</code>
+        </div>
+
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>bg %1</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>[1]+ sleep 300 &amp;</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>bg wird meist nach Strg+Z verwendet, um einen mit Strg+Z angehaltenen Prozess im Hintergrund weiterlaufen zu lassen.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="fg">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">fg</code>
+          <span class="cmd-block-index">07</span>
+        </div>
+        <p class="cmd-block-desc">Holt einen Hintergrundprozess zurück in den Vordergrund (foreground).</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>fg [job-nummer]</code>
+        </div>
+
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>fg %1</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>sleep 300
+Bringt den Job wieder in den Vordergrund, das Terminal ist dann bis zum Ende des Befehls blockiert.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Ohne Job-Nummer holt fg automatisch den zuletzt in den Hintergrund geschickten Prozess zurück.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="nice">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">nice</code>
+          <span class="cmd-block-index">08</span>
+        </div>
+        <p class="cmd-block-desc">Startet einen Prozess mit einer bestimmten Priorität, um die CPU-Nutzung zu steuern.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>nice -n [wert] [befehl]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-n [wert]</code></td><td>Priorität von -20 (hoch) bis 19 (niedrig), Standard ist 0</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>nice -n 10 tar -czf backup.tar.gz dokumente/</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Kein sichtbarer Output beim Start. Der Befehl läuft mit niedrigerer Priorität, damit andere Programme bevorzugt CPU-Zeit bekommen.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Ein höherer nice-Wert bedeutet weniger Priorität - man ist quasi "netter" zu den anderen Prozessen.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="renice">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">renice</code>
+          <span class="cmd-block-index">09</span>
+        </div>
+        <p class="cmd-block-desc">Ändert die Priorität eines bereits laufenden Prozesses nachträglich.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>renice [wert] -p [pid]</code>
+        </div>
+
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>renice 15 -p 4821</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>4821 (process ID) old priority 0, new priority 15</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Im Gegensatz zu nice muss der Prozess bei renice bereits laufen - man ändert die Priorität nachträglich statt beim Start.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="nohup">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">nohup</code>
+          <span class="cmd-block-index">10</span>
+        </div>
+        <p class="cmd-block-desc">Startet einen Prozess so, dass er auch nach dem Schliessen des Terminals weiterläuft.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>nohup [befehl] &amp;</code>
+        </div>
+
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>nohup python3 server.py &amp;</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>nohup: Ausgabe wird an 'nohup.out' angehängt
+[1] 5102</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>nohup wird oft in Kombination mit &amp; verwendet, damit der Prozess sowohl im Hintergrund läuft als auch das Terminal überlebt.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="pgrep">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">pgrep</code>
+          <span class="cmd-block-index">11</span>
+        </div>
+        <p class="cmd-block-desc">Sucht nach Prozessen anhand ihres Namens und zeigt deren Prozess-ID an.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>pgrep [name]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-l</code></td><td>Zeigt zusätzlich den Prozessnamen zur PID an</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>pgrep -l firefox</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>4821 firefox</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>pgrep spart den Umweg über ps aux | grep, da man direkt nach dem Namen suchen kann.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="pkill">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">pkill</code>
+          <span class="cmd-block-index">12</span>
+        </div>
+        <p class="cmd-block-desc">Beendet Prozesse direkt anhand ihres Namens, ohne die PID vorher nachschlagen zu müssen.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>pkill [name]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-9</code></td><td>Erzwingt das sofortige Beenden</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>pkill firefox</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Kein sichtbarer Output. Alle Prozesse mit dem Namen firefox werden beendet.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>pkill ist praktisch, kann aber gefährlich sein, wenn mehrere unterschiedliche Prozesse denselben Namen tragen.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="watch">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">watch</code>
+          <span class="cmd-block-index">13</span>
+        </div>
+        <p class="cmd-block-desc">Führt einen Befehl wiederholt in festen Abständen aus und zeigt die Ausgabe live aktualisiert an.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>watch [optionen] [befehl]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-n [sekunden]</code></td><td>Legt das Aktualisierungsintervall fest (Standard: 2 Sekunden)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>watch -n 5 df -h</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Zeigt die Ausgabe von df -h und aktualisiert sie alle 5 Sekunden automatisch, bis man mit Strg+C abbricht.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>watch eignet sich gut, um Systemwerte wie Speicherplatz oder Prozesse laufend im Blick zu behalten, ohne den Befehl manuell zu wiederholen.</p>
+        </div>
+      </article>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ── UNTERE NAVIGATION ── -->
+  <nav class="bottom-nav">
+    <a href="04-berechtigungen.html" class="nav-btn nav-btn--ghost">&larr; 04</a>
+    <span class="bottom-nav-label">Kapitel 05 von 08 · Prozesse</span>
+    <a href="06-hilfesystem.html" class="nav-btn nav-btn--primary">06 &rarr;</a>
+  </nav>
+
+  <script>
+    function tick() {
+      const now = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      document.getElementById('clock').textContent =
+        pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+    }
+    tick();
+    setInterval(tick, 1000);
+  </script>
+
+</body>
+</html>

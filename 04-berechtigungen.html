@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kapitel 04 · Berechtigungen — Linux Handbuch</title>
+  <link rel="stylesheet" href="chapter.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <header>
+    <div class="header-left">
+      <a href="index.html" class="header-tag header-tag--link">SBB-STYLE</a>
+      <span class="header-divider">|</span>
+      <span class="header-title">LINUX HANDBUCH</span>
+    </div>
+    <div class="header-right">
+      <span id="clock">00:00:00</span>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- ── SIDEBAR: Sprungliste der Befehle im Kapitel ── -->
+    <aside class="sidebar">
+      <div class="sidebar-kap">
+        <span class="sidebar-kap-num">04</span>
+        <span class="sidebar-kap-track">GLEIS B1</span>
+      </div>
+      <div class="sidebar-title">Berechtigungen</div>
+      <div class="sidebar-label">BEFEHLE</div>
+      <nav class="cmd-nav">
+        <a href="#chmod" class="cmd-nav-item"><code>chmod</code></a>
+        <a href="#chown" class="cmd-nav-item"><code>chown</code></a>
+        <a href="#chgrp" class="cmd-nav-item"><code>chgrp</code></a>
+        <a href="#umask" class="cmd-nav-item"><code>umask</code></a>
+        <a href="#sudo" class="cmd-nav-item"><code>sudo</code></a>
+        <a href="#su" class="cmd-nav-item"><code>su</code></a>
+        <a href="#whoami" class="cmd-nav-item"><code>whoami</code></a>
+        <a href="#id" class="cmd-nav-item"><code>id</code></a>
+        <a href="#groups" class="cmd-nav-item"><code>groups</code></a>
+      </nav>
+    </aside>
+
+    <!-- ── HAUPTINHALT ── -->
+    <main class="content">
+
+      <div class="chapter-hero">
+        <span class="chapter-hero-num">KAP. 04</span>
+        <h1 class="chapter-hero-title">Berechtigungen</h1>
+      </div>
+
+      <p class="chapter-intro">Linux ist ein Mehrbenutzersystem, bei dem jede Datei genau festgelegte Zugriffsrechte besitzt. Dieses Kapitel erklärt, wie man diese Rechte liest, ändert und versteht, wer welche Aktionen ausführen darf.</p>
+
+      <div class="cmd-list">
+      <article class="cmd-block" id="chmod">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">chmod</code>
+          <span class="cmd-block-index">01</span>
+        </div>
+        <p class="cmd-block-desc">Ändert die Zugriffsrechte (Berechtigungen) einer Datei oder eines Ordners.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>chmod [rechte] [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>u+x</code></td><td>Fügt dem Besitzer (user) Ausführrechte hinzu</td></tr>
+          <tr><td class="flag-cell"><code>g-w</code></td><td>Entfernt der Gruppe Schreibrechte</td></tr>
+          <tr><td class="flag-cell"><code>755</code></td><td>Setzt Rechte numerisch: rwx für Besitzer, r-x für Gruppe und Andere</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>chmod 755 skript.sh</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Kein sichtbarer Output. ls -l zeigt danach: -rwxr-xr-x skript.sh</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Die Zahlenschreibweise (z.B. 755) ist eine Summe: Lesen = 4, Schreiben = 2, Ausführen = 1. 7 bedeutet also alle drei Rechte.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="chown">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">chown</code>
+          <span class="cmd-block-index">02</span>
+        </div>
+        <p class="cmd-block-desc">Ändert den Besitzer einer Datei oder eines Ordners.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>chown [benutzer] [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-R</code></td><td>Ändert den Besitzer rekursiv für alle Unterordner und Dateien</td></tr>
+          <tr><td class="flag-cell"><code>[benutzer]:[gruppe]</code></td><td>Ändert Besitzer und Gruppe gleichzeitig</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>sudo chown elias:elias bericht.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Kein sichtbarer Output. ls -l zeigt danach elias als neuen Besitzer und neue Gruppe an.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>chown benötigt normalerweise sudo-Rechte, da man sonst nur Dateien ändern darf, die einem selbst gehören.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="chgrp">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">chgrp</code>
+          <span class="cmd-block-index">03</span>
+        </div>
+        <p class="cmd-block-desc">Ändert nur die Gruppenzugehörigkeit einer Datei, ohne den Besitzer zu ändern.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>chgrp [gruppe] [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-R</code></td><td>Ändert die Gruppe rekursiv für alle Unterordner</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>chgrp team bericht.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Kein sichtbarer Output. Die Gruppe der Datei wird auf team gesetzt.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>chgrp ist im Prinzip eine Kurzform von chown, wenn man nur die Gruppe und nicht den Besitzer ändern möchte.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="umask">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">umask</code>
+          <span class="cmd-block-index">04</span>
+        </div>
+        <p class="cmd-block-desc">Legt fest, welche Standardrechte neu erstellte Dateien und Ordner automatisch erhalten.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>umask [wert]</code>
+        </div>
+
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>umask 022</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Kein sichtbarer Output. Neu erstellte Dateien erhalten danach standardmässig die Rechte 644, neue Ordner 755.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Der umask-Wert wird von den maximalen Rechten (666 für Dateien, 777 für Ordner) abgezogen. umask 022 ist auf den meisten Systemen der Standard.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="sudo">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">sudo</code>
+          <span class="cmd-block-index">05</span>
+        </div>
+        <p class="cmd-block-desc">Führt einen Befehl mit Administratorrechten aus (superuser do).</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>sudo [befehl]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-i</code></td><td>Startet eine vollständige Root-Shell</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>sudo apt update</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>[sudo] Passwort für elias: ****
+Fragt nach dem eigenen Benutzerpasswort und führt den Befehl danach mit erweiterten Rechten aus.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>sudo sollte man nur verwenden, wenn es wirklich nötig ist. Ein falscher Befehl mit sudo kann grösseren Schaden anrichten als ohne.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="su">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">su</code>
+          <span class="cmd-block-index">06</span>
+        </div>
+        <p class="cmd-block-desc">Wechselt zu einem anderen Benutzerkonto (switch user), z.B. direkt zu root.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>su [benutzername]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-</code></td><td>Lädt zusätzlich die Umgebung des Zielbenutzers vollständig</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>su -</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Passwort: ****
+Wechselt danach vollständig ins root-Konto, erkennbar am # statt $ im Prompt.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Auf modernen Ubuntu-Systemen ist das direkte root-Passwort meist nicht gesetzt. Dort wird stattdessen sudo bevorzugt.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="whoami">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">whoami</code>
+          <span class="cmd-block-index">07</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt den Namen des aktuell angemeldeten Benutzers an.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>whoami</code>
+        </div>
+
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>whoami</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>elias</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>whoami ist praktisch, um schnell zu prüfen, mit welchem Benutzerkonto man gerade arbeitet, besonders nach su oder sudo -i.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="id">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">id</code>
+          <span class="cmd-block-index">08</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt die Benutzer-ID, Gruppen-ID und alle Gruppenmitgliedschaften des aktuellen Benutzers an.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>id [benutzername]</code>
+        </div>
+
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>id</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>uid=1000(elias) gid=1000(elias) gruppen=1000(elias),27(sudo),999(docker)</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>An der Gruppe sudo in der Ausgabe erkennt man, ob ein Benutzer Administratorrechte über sudo besitzt.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="groups">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">groups</code>
+          <span class="cmd-block-index">09</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt an, in welchen Gruppen der aktuelle oder ein anderer Benutzer Mitglied ist.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>groups [benutzername]</code>
+        </div>
+
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>groups elias</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>elias : elias sudo docker</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>groups zeigt eine übersichtlichere, kürzere Liste als id - ideal, wenn man nur die Gruppenzugehörigkeit sehen möchte.</p>
+        </div>
+      </article>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ── UNTERE NAVIGATION ── -->
+  <nav class="bottom-nav">
+    <a href="03-dateiinhalt.html" class="nav-btn nav-btn--ghost">&larr; 03</a>
+    <span class="bottom-nav-label">Kapitel 04 von 08 · Berechtigungen</span>
+    <a href="05-prozesse.html" class="nav-btn nav-btn--primary">05 &rarr;</a>
+  </nav>
+
+  <script>
+    function tick() {
+      const now = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      document.getElementById('clock').textContent =
+        pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+    }
+    tick();
+    setInterval(tick, 1000);
+  </script>
+
+</body>
+</html>

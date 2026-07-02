@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kapitel 03 · Dateiinhalt lesen — Linux Handbuch</title>
+  <link rel="stylesheet" href="chapter.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <header>
+    <div class="header-left">
+      <a href="index.html" class="header-tag header-tag--link">SBB-STYLE</a>
+      <span class="header-divider">|</span>
+      <span class="header-title">LINUX HANDBUCH</span>
+    </div>
+    <div class="header-right">
+      <span id="clock">00:00:00</span>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- ── SIDEBAR: Sprungliste der Befehle im Kapitel ── -->
+    <aside class="sidebar">
+      <div class="sidebar-kap">
+        <span class="sidebar-kap-num">03</span>
+        <span class="sidebar-kap-track">GLEIS A3</span>
+      </div>
+      <div class="sidebar-title">Dateiinhalt lesen</div>
+      <div class="sidebar-label">BEFEHLE</div>
+      <nav class="cmd-nav">
+        <a href="#cat" class="cmd-nav-item"><code>cat</code></a>
+        <a href="#less" class="cmd-nav-item"><code>less</code></a>
+        <a href="#more" class="cmd-nav-item"><code>more</code></a>
+        <a href="#head" class="cmd-nav-item"><code>head</code></a>
+        <a href="#tail" class="cmd-nav-item"><code>tail</code></a>
+        <a href="#grep" class="cmd-nav-item"><code>grep</code></a>
+        <a href="#wc" class="cmd-nav-item"><code>wc</code></a>
+        <a href="#sort" class="cmd-nav-item"><code>sort</code></a>
+        <a href="#uniq" class="cmd-nav-item"><code>uniq</code></a>
+        <a href="#diff" class="cmd-nav-item"><code>diff</code></a>
+        <a href="#cut" class="cmd-nav-item"><code>cut</code></a>
+        <a href="#awk" class="cmd-nav-item"><code>awk</code></a>
+        <a href="#sed" class="cmd-nav-item"><code>sed</code></a>
+      </nav>
+    </aside>
+
+    <!-- ── HAUPTINHALT ── -->
+    <main class="content">
+
+      <div class="chapter-hero">
+        <span class="chapter-hero-num">KAP. 03</span>
+        <h1 class="chapter-hero-title">Dateiinhalt lesen</h1>
+      </div>
+
+      <p class="chapter-intro">In diesem Kapitel lernt man, wie man den Inhalt von Textdateien anzeigt, durchsucht und weiterverarbeitet, ohne einen Editor öffnen zu müssen. Diese Befehle werden oft miteinander kombiniert (mit Pipes), um schnell Informationen aus Dateien herauszufiltern.</p>
+
+      <div class="cmd-list">
+      <article class="cmd-block" id="cat">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">cat</code>
+          <span class="cmd-block-index">01</span>
+        </div>
+        <p class="cmd-block-desc">Gibt den gesamten Inhalt einer Datei im Terminal aus.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>cat [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-n</code></td><td>Zeigt Zeilennummern an</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>cat notizen.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Einkaufsliste:
+- Milch
+- Brot
+- Kaffee</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>cat eignet sich gut für kurze Dateien. Bei langen Dateien scrollt der Inhalt schnell aus dem sichtbaren Bereich - dafür eignet sich less besser.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="less">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">less</code>
+          <span class="cmd-block-index">02</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt den Inhalt einer Datei seitenweise an, ohne alles auf einmal auszugeben.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>less [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>/[suchbegriff]</code></td><td>Sucht innerhalb von less nach einem Begriff (im Programm eingeben)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>less logfile.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Öffnet die Datei interaktiv. Man navigiert mit den Pfeiltasten, mit q beendet man less wieder.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>less lädt die Datei nicht komplett in den Speicher, weshalb es sich auch für sehr grosse Dateien eignet.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="more">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">more</code>
+          <span class="cmd-block-index">03</span>
+        </div>
+        <p class="cmd-block-desc">Ähnlich wie less, zeigt Inhalte seitenweise an, ist aber einfacher und älter.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>more [datei]</code>
+        </div>
+
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>more logfile.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Zeigt die erste Bildschirmseite. Mit der Leertaste blättert man weiter.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>less kann fast alles, was more kann, zusätzlich aber auch rückwärts blättern. In der Praxis wird meist less bevorzugt.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="head">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">head</code>
+          <span class="cmd-block-index">04</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt die ersten Zeilen einer Datei an.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>head [optionen] [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-n [zahl]</code></td><td>Legt die Anzahl der angezeigten Zeilen fest (Standard: 10)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>head -n 5 logfile.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>09:12:03 Server gestartet
+09:12:05 Verbindung hergestellt
+09:13:41 Nutzer eingeloggt
+09:14:02 Anfrage empfangen
+09:14:03 Antwort gesendet</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>head eignet sich gut, um schnell einen Überblick über eine Datei zu bekommen, ohne sie komplett zu öffnen.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="tail">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">tail</code>
+          <span class="cmd-block-index">05</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt die letzten Zeilen einer Datei an.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>tail [optionen] [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-n [zahl]</code></td><td>Legt die Anzahl der angezeigten Zeilen fest</td></tr>
+          <tr><td class="flag-cell"><code>-f</code></td><td>Verfolgt die Datei live und zeigt neue Zeilen sofort an</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>tail -f logfile.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Zeigt die letzten 10 Zeilen und bleibt danach aktiv - neue Einträge erscheinen laufend, bis man mit Strg+C abbricht.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>tail -f wird sehr häufig verwendet, um Logdateien in Echtzeit zu beobachten, z.B. bei laufenden Servern.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="grep">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">grep</code>
+          <span class="cmd-block-index">06</span>
+        </div>
+        <p class="cmd-block-desc">Durchsucht Dateien nach Textmustern und zeigt passende Zeilen an.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>grep [optionen] [muster] [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-i</code></td><td>Ignoriert Gross-/Kleinschreibung</td></tr>
+          <tr><td class="flag-cell"><code>-r</code></td><td>Durchsucht Ordner rekursiv</td></tr>
+          <tr><td class="flag-cell"><code>-n</code></td><td>Zeigt die Zeilennummer der Treffer an</td></tr>
+          <tr><td class="flag-cell"><code>-v</code></td><td>Zeigt nur Zeilen, die NICHT auf das Muster passen</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>grep -n "Fehler" logfile.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>42: 09:41:12 Fehler beim Verbindungsaufbau
+108: 10:03:55 Fehler: Timeout</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>grep gehört zu den am häufigsten genutzten Befehlen überhaupt und wird oft mit Pipes kombiniert, z.B. cat logfile.txt | grep Fehler.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="wc">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">wc</code>
+          <span class="cmd-block-index">07</span>
+        </div>
+        <p class="cmd-block-desc">Zählt Zeilen, Wörter und Zeichen einer Datei (word count).</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>wc [optionen] [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-l</code></td><td>Zählt nur Zeilen</td></tr>
+          <tr><td class="flag-cell"><code>-w</code></td><td>Zählt nur Wörter</td></tr>
+          <tr><td class="flag-cell"><code>-c</code></td><td>Zählt nur Zeichen (Bytes)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>wc -l logfile.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>342 logfile.txt</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>wc -l wird oft mit grep kombiniert, um die Anzahl der Treffer zu zählen, z.B. grep Fehler logfile.txt | wc -l.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="sort">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">sort</code>
+          <span class="cmd-block-index">08</span>
+        </div>
+        <p class="cmd-block-desc">Sortiert die Zeilen einer Datei alphabetisch oder numerisch.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>sort [optionen] [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-n</code></td><td>Sortiert numerisch statt alphabetisch</td></tr>
+          <tr><td class="flag-cell"><code>-r</code></td><td>Kehrt die Sortierreihenfolge um</td></tr>
+          <tr><td class="flag-cell"><code>-u</code></td><td>Entfernt doppelte Zeilen beim Sortieren</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>sort namen.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Anna
+Bernd
+Clara</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Ohne -n sortiert sort Zahlen wie Text, wodurch z.B. 10 vor 2 stehen würde. Bei Zahlenkolonnen ist -n also wichtig.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="uniq">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">uniq</code>
+          <span class="cmd-block-index">09</span>
+        </div>
+        <p class="cmd-block-desc">Entfernt aufeinanderfolgende doppelte Zeilen aus einer Datei.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>uniq [optionen] [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-c</code></td><td>Zeigt zusätzlich, wie oft jede Zeile vorkam</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>sort namen.txt | uniq -c</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>2 Anna
+1 Bernd
+3 Clara</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>uniq erkennt nur direkt aufeinanderfolgende Duplikate. Deshalb wird die Datei meist vorher mit sort sortiert.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="diff">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">diff</code>
+          <span class="cmd-block-index">10</span>
+        </div>
+        <p class="cmd-block-desc">Vergleicht zwei Dateien und zeigt die Unterschiede an.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>diff [datei1] [datei2]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-u</code></td><td>Zeigt die Unterschiede im übersichtlichen unified-Format</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>diff -u bericht_alt.txt bericht_neu.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>-Der Umsatz stieg um 5%.
++Der Umsatz stieg um 8%.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Zeilen mit - stammen aus der ersten, Zeilen mit + aus der zweiten Datei. So sieht man auf einen Blick, was sich geändert hat.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="cut">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">cut</code>
+          <span class="cmd-block-index">11</span>
+        </div>
+        <p class="cmd-block-desc">Schneidet bestimmte Spalten oder Zeichenbereiche aus jeder Zeile einer Datei heraus.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>cut [optionen] [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-d [zeichen]</code></td><td>Legt das Trennzeichen fest, z.B. Komma</td></tr>
+          <tr><td class="flag-cell"><code>-f [zahl]</code></td><td>Wählt die Spaltennummer aus</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>cut -d',' -f1 kontakte.csv</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Anna
+Bernd
+Clara</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>cut eignet sich gut für einfache, sauber strukturierte Dateien wie CSV. Bei komplexeren Fällen ist awk flexibler.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="awk">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">awk</code>
+          <span class="cmd-block-index">12</span>
+        </div>
+        <p class="cmd-block-desc">Ein mächtiges Werkzeug zur Textverarbeitung, das Zeilen in Spalten aufteilt und gezielt verarbeitet.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>awk '[programm]' [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>'{print $1}'</code></td><td>Gibt die erste Spalte jeder Zeile aus</td></tr>
+          <tr><td class="flag-cell"><code>-F ','</code></td><td>Legt ein eigenes Trennzeichen fest</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>awk -F',' '{print $2}' kontakte.csv</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>anna@mail.ch
+bernd@mail.ch
+clara@mail.ch</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>awk kann sehr komplex werden. Für den Einstieg reicht es, einzelne Spalten mit print $spaltennummer auszugeben.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="sed">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">sed</code>
+          <span class="cmd-block-index">13</span>
+        </div>
+        <p class="cmd-block-desc">Sucht und ersetzt Text in Dateien automatisch, ohne einen Editor zu öffnen (stream editor).</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>sed 's/[alt]/[neu]/g' [datei]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-i</code></td><td>Ändert die Datei direkt statt nur die Ausgabe anzuzeigen</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>sed 's/Fehler/Warnung/g' logfile.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Zeigt logfile.txt mit allen Vorkommen von "Fehler" durch "Warnung" ersetzt, ohne die Originaldatei zu ändern.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Ohne -i verändert sed die Originaldatei nicht, sondern gibt das Ergebnis nur im Terminal aus. Das ist praktisch zum sicheren Testen.</p>
+        </div>
+      </article>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ── UNTERE NAVIGATION ── -->
+  <nav class="bottom-nav">
+    <a href="02-dateien.html" class="nav-btn nav-btn--ghost">&larr; 02</a>
+    <span class="bottom-nav-label">Kapitel 03 von 08 · Dateiinhalt lesen</span>
+    <a href="04-berechtigungen.html" class="nav-btn nav-btn--primary">04 &rarr;</a>
+  </nav>
+
+  <script>
+    function tick() {
+      const now = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      document.getElementById('clock').textContent =
+        pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+    }
+    tick();
+    setInterval(tick, 1000);
+  </script>
+
+</body>
+</html>
