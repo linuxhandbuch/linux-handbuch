@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Einleitung — Linux Handbuch</title>
+  <link rel="stylesheet" href="chapter.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <header>
+    <div class="header-left">
+      <a href="index.html" class="header-tag header-tag--link">SBB-STYLE</a>
+      <span class="header-divider">|</span>
+      <span class="header-title">LINUX HANDBUCH</span>
+    </div>
+    <div class="header-right">
+      <span id="clock">00:00:00</span>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <aside class="sidebar">
+      <div class="sidebar-kap">
+        <span class="sidebar-kap-num">00</span>
+        <span class="sidebar-kap-track">GLEIS A0</span>
+      </div>
+      <div class="sidebar-title">Einleitung</div>
+      <div class="sidebar-label">INHALT</div>
+      <nav class="cmd-nav">
+        <a href="#willkommen" class="cmd-nav-item"><code>willkommen</code></a>
+        <a href="#terminal" class="cmd-nav-item"><code>terminal</code></a>
+        <a href="#aufbau" class="cmd-nav-item"><code>aufbau</code></a>
+      </nav>
+    </aside>
+
+    <main class="content">
+
+      <div class="chapter-hero">
+        <span class="chapter-hero-num">KAP. 00</span>
+        <h1 class="chapter-hero-title">Einleitung</h1>
+      </div>
+
+      <p class="chapter-intro">
+        Willkommen im Kreativen Linux Handbuch. Dieses Nachschlagewerk richtet sich an
+        Einsteiger ohne viel Linux-Erfahrung und erklärt die wichtigsten Befehle
+        praxisnah, direkt und auf den Punkt.
+      </p>
+
+      <div class="cmd-list">
+
+        <article class="cmd-block" id="willkommen">
+          <div class="cmd-block-head">
+            <code class="cmd-block-name">Willkommen</code>
+            <span class="cmd-block-index">01</span>
+          </div>
+          <p class="cmd-block-desc">
+            Linux ist ein freies Betriebssystem, das auf sehr vielen Servern, aber auch
+            immer mehr Desktop-Rechnern läuft. Anders als bei Windows oder macOS steuert
+            man Linux oft über die Kommandozeile (das Terminal) statt über Klicks mit der
+            Maus. Das wirkt am Anfang ungewohnt, ist aber mit etwas Übung schneller und
+            präziser als jede grafische Oberfläche.
+          </p>
+        </article>
+
+        <article class="cmd-block" id="terminal">
+          <div class="cmd-block-head">
+            <code class="cmd-block-name">Das Terminal</code>
+            <span class="cmd-block-index">02</span>
+          </div>
+          <p class="cmd-block-desc">
+            Das Terminal ist das Fenster, in dem man Befehle eingibt. Ein Befehl besteht
+            meist aus einem Namen (z.B. ls), gefolgt von optionalen Flags (z.B. -l) und
+            Argumenten (z.B. einem Ordnernamen). Nach dem Drücken von Enter führt das
+            System den Befehl aus und zeigt das Ergebnis direkt darunter an.
+          </p>
+          <div class="field-label">BEISPIEL</div>
+          <div class="terminal-box">
+            <code><span class="prompt">$ </span>ls -l dokumente/</code>
+          </div>
+        </article>
+
+        <article class="cmd-block" id="aufbau">
+          <div class="cmd-block-head">
+            <code class="cmd-block-name">Aufbau des Handbuchs</code>
+            <span class="cmd-block-index">03</span>
+          </div>
+          <p class="cmd-block-desc">
+            Das Handbuch ist in 13 Kapitel unterteilt, jedes mit mehreren Befehlen. Jeder
+            Befehl wird gleich aufgebaut erklärt: eine kurze Beschreibung, die Syntax,
+            die wichtigsten Flags in einer Tabelle, ein realistisches Beispiel mit
+            erwartetem Output und, wo hilfreich, ein zusätzlicher Hinweis. So findet man
+            sich in jedem Kapitel sofort zurecht.
+          </p>
+        </article>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-btn nav-btn--ghost">&larr; Übersicht</a>
+    <span class="bottom-nav-label">Kapitel 00 von 13 · Einleitung</span>
+    <a href="01-navigation.html" class="nav-btn nav-btn--primary">01 &rarr;</a>
+  </nav>
+
+  <script>
+    function tick() {
+      const now = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      document.getElementById('clock').textContent =
+        pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+    }
+    tick();
+    setInterval(tick, 1000);
+  </script>
+
+</body>
+</html>
