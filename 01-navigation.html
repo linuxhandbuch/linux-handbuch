@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kapitel 01 · Navigation &amp; Dateisystem — Linux Handbuch</title>
+  <link rel="stylesheet" href="chapter.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <header>
+    <div class="header-left">
+      <a href="index.html" class="header-tag header-tag--link">SBB-STYLE</a>
+      <span class="header-divider">|</span>
+      <span class="header-title">LINUX HANDBUCH</span>
+    </div>
+    <div class="header-right">
+      <span id="clock">00:00:00</span>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- ── SIDEBAR: Sprungliste der Befehle im Kapitel ── -->
+    <aside class="sidebar">
+      <div class="sidebar-kap">
+        <span class="sidebar-kap-num">01</span>
+        <span class="sidebar-kap-track">GLEIS A1</span>
+      </div>
+      <div class="sidebar-title">Navigation &amp; Dateisystem</div>
+      <div class="sidebar-label">BEFEHLE</div>
+      <nav class="cmd-nav">
+        <a href="#pwd" class="cmd-nav-item"><code>pwd</code></a>
+        <a href="#cd" class="cmd-nav-item"><code>cd</code></a>
+        <a href="#ls" class="cmd-nav-item"><code>ls</code></a>
+        <a href="#find" class="cmd-nav-item"><code>find</code></a>
+        <a href="#locate" class="cmd-nav-item"><code>locate</code></a>
+        <a href="#tree" class="cmd-nav-item"><code>tree</code></a>
+        <a href="#du" class="cmd-nav-item"><code>du</code></a>
+        <a href="#realpath" class="cmd-nav-item"><code>realpath</code></a>
+      </nav>
+    </aside>
+
+    <!-- ── HAUPTINHALT ── -->
+    <main class="content">
+
+      <div class="chapter-hero">
+        <span class="chapter-hero-num">KAP. 01</span>
+        <h1 class="chapter-hero-title">Navigation &amp; Dateisystem</h1>
+      </div>
+
+      <p class="chapter-intro">In diesem Kapitel geht es um die Grundlagen der Navigation im Linux-Dateisystem. Man lernt, wie man sich zwischen Ordnern bewegt, den aktuellen Standort herausfindet und Dateien sucht. Diese Befehle bilden die Basis für praktisch alle weiteren Arbeiten in der Kommandozeile.</p>
+
+      <div class="cmd-list">
+      <article class="cmd-block" id="pwd">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">pwd</code>
+          <span class="cmd-block-index">01</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt den aktuellen Standort im Dateisystem an (print working directory).</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>pwd</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-P</code></td><td>Zeigt den physischen Pfad ohne symbolische Links</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>pwd</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>/home/elias/dokumente</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Man findet pwd besonders hilfreich, wenn man sich in einer tiefen Ordnerstruktur verirrt hat.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="cd">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">cd</code>
+          <span class="cmd-block-index">02</span>
+        </div>
+        <p class="cmd-block-desc">Wechselt das aktuelle Verzeichnis (change directory).</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>cd [pfad]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>..</code></td><td>Wechselt eine Ebene nach oben</td></tr>
+          <tr><td class="flag-cell"><code>~</code></td><td>Wechselt ins Heimverzeichnis</td></tr>
+          <tr><td class="flag-cell"><code>-</code></td><td>Wechselt zurück ins vorherige Verzeichnis</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>cd dokumente/berichte</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>Kein sichtbarer Output. pwd zeigt danach den neuen Pfad an, z.B. /home/elias/dokumente/berichte.</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Ein einfaches cd ohne Argument bringt man immer direkt ins eigene Heimverzeichnis zurück.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="ls">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">ls</code>
+          <span class="cmd-block-index">03</span>
+        </div>
+        <p class="cmd-block-desc">Listet den Inhalt eines Verzeichnisses auf.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>ls [optionen] [pfad]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-l</code></td><td>Detailansicht mit Berechtigungen, Grösse und Datum</td></tr>
+          <tr><td class="flag-cell"><code>-a</code></td><td>Zeigt auch versteckte Dateien</td></tr>
+          <tr><td class="flag-cell"><code>-h</code></td><td>Zeigt Dateigrössen in lesbarem Format</td></tr>
+          <tr><td class="flag-cell"><code>-R</code></td><td>Listet Inhalt rekursiv, inkl. aller Unterordner</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>ls -lah dokumente/</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>drwxr-xr-x 2 elias elias 4,0K Jul  2 09:15 .
+drwxr-xr-x 8 elias elias 4,0K Jul  1 18:30 ..
+-rw-r--r-- 1 elias elias  12K Jun 28 14:02 bericht.txt
+-rw-r--r-- 1 elias elias 3,4M Jun 30 11:47 präsentation.pptx</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Die Kombination -lah wird sehr häufig verwendet, weil man damit alle wichtigen Infos auf einen Blick erhält.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="find">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">find</code>
+          <span class="cmd-block-index">04</span>
+        </div>
+        <p class="cmd-block-desc">Durchsucht ein Verzeichnis und dessen Unterordner nach Dateien oder Ordnern, die bestimmten Kriterien entsprechen.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>find [pfad] [kriterien]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-name</code></td><td>Sucht nach Dateinamen (unterstützt Wildcards)</td></tr>
+          <tr><td class="flag-cell"><code>-type f</code></td><td>Findet nur Dateien</td></tr>
+          <tr><td class="flag-cell"><code>-type d</code></td><td>Findet nur Ordner</td></tr>
+          <tr><td class="flag-cell"><code>-mtime -7</code></td><td>Findet Dateien, die in den letzten 7 Tagen geändert wurden</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>find dokumente/ -name "*.pdf"</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>dokumente/rechnungen/miete_juni.pdf
+dokumente/berichte/abschluss.pdf</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>find durchsucht rekursiv, also alle Unterordner automatisch mit. Bei grossen Ordnerstrukturen kann das etwas dauern.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="locate">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">locate</code>
+          <span class="cmd-block-index">05</span>
+        </div>
+        <p class="cmd-block-desc">Findet Dateien anhand des Namens über eine vorab erstellte Systemdatenbank, statt live zu durchsuchen.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>locate [suchbegriff]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-i</code></td><td>Ignoriert Gross-/Kleinschreibung</td></tr>
+          <tr><td class="flag-cell"><code>-c</code></td><td>Zeigt nur die Anzahl der Treffer</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>locate bashrc</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>/home/elias/.bashrc
+/etc/bash.bashrc</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>locate ist viel schneller als find, zeigt aber nur Dateien, die zum Zeitpunkt der letzten Datenbank-Aktualisierung existierten. Mit sudo updatedb aktualisiert man die Datenbank manuell.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="tree">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">tree</code>
+          <span class="cmd-block-index">06</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt die Ordnerstruktur als übersichtliche Baumansicht an.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>tree [pfad]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-L 2</code></td><td>Begrenzt die Tiefe der Anzeige auf 2 Ebenen</td></tr>
+          <tr><td class="flag-cell"><code>-d</code></td><td>Zeigt nur Ordner, keine Dateien</td></tr>
+          <tr><td class="flag-cell"><code>-a</code></td><td>Zeigt auch versteckte Dateien</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>tree -L 2 dokumente/</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>dokumente/
+├── berichte/
+│   └── abschluss.pdf
+├── rechnungen/
+│   └── miete_juni.pdf
+└── bericht.txt</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>tree ist auf manchen Systemen nicht vorinstalliert. Mit sudo apt install tree lässt es sich nachinstallieren.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="du">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">du</code>
+          <span class="cmd-block-index">07</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt den Speicherplatzverbrauch von Dateien und Ordnern an (disk usage).</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>du [optionen] [pfad]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>-s</code></td><td>Zeigt nur die Gesamtsumme, nicht jede Unterdatei einzeln</td></tr>
+          <tr><td class="flag-cell"><code>-h</code></td><td>Zeigt Grössen in lesbarem Format</td></tr>
+          <tr><td class="flag-cell"><code>-a</code></td><td>Zeigt auch einzelne Dateien, nicht nur Ordner</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>du -sh dokumente/*</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>24K     dokumente/berichte
+3,4M    dokumente/präsentation.pptx
+128K    dokumente/rechnungen</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>Die Kombination -sh mit einem Stern (*) am Pfadende zeigt praktischerweise die Grösse jedes einzelnen Elements im Ordner an, statt nur die Gesamtsumme.</p>
+        </div>
+      </article>
+
+      <article class="cmd-block" id="realpath">
+        <div class="cmd-block-head">
+          <code class="cmd-block-name">realpath</code>
+          <span class="cmd-block-index">08</span>
+        </div>
+        <p class="cmd-block-desc">Zeigt den vollständigen, absoluten Pfad einer Datei oder eines Ordners an.</p>
+
+        <div class="field-label">SYNTAX</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>realpath [datei/ordner]</code>
+        </div>
+        <div class="field-label">FLAGS</div>
+        <div class="flags-wrap">
+          <table class="flags-table">
+            <thead><tr><th>Flag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+          <tr><td class="flag-cell"><code>--relative-to=[pfad]</code></td><td>Zeigt den Pfad relativ zu einem angegebenen Ort an</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-label">BEISPIEL</div>
+        <div class="terminal-box">
+          <code><span class="prompt">$ </span>realpath bericht.txt</code>
+        </div>
+
+        <div class="field-label">OUTPUT</div>
+        <div class="output-box"><pre>/home/elias/dokumente/berichte/bericht.txt</pre></div>
+        <div class="hint-box">
+          <span class="hint-tag">HINWEIS</span>
+          <p>realpath löst auch symbolische Links auf und zeigt den tatsächlichen Zielort an, was bei pwd oder relativen Pfadangaben nicht der Fall ist.</p>
+        </div>
+      </article>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ── UNTERE NAVIGATION ── -->
+  <nav class="bottom-nav">
+    <a href="00-einleitung.html" class="nav-btn nav-btn--ghost">&larr; 00</a>
+    <span class="bottom-nav-label">Kapitel 01 von 08 · Navigation &amp; Dateisystem</span>
+    <a href="02-dateien.html" class="nav-btn nav-btn--primary">02 &rarr;</a>
+  </nav>
+
+  <script>
+    function tick() {
+      const now = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      document.getElementById('clock').textContent =
+        pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+    }
+    tick();
+    setInterval(tick, 1000);
+  </script>
+
+</body>
+</html>
