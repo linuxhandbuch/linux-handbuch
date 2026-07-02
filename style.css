@@ -101,7 +101,15 @@ header {
   transform: translateY(-8px);
   transition: opacity 0.25s ease, transform 0.25s ease, background 0.15s;
   cursor: pointer;
+  text-decoration: none;
 }
+
+.board-row--pending {
+  cursor: default;
+}
+.board-row--pending:hover { background: transparent; }
+.board-row--pending:hover .row-title { color: var(--text); }
+.board-row--pending:hover .row-track { color: var(--muted); }
 
 .board-row.revealed {
   opacity: 1;
