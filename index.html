@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <title>Linux Handbuch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-container">
+
+    <nav class="sidebar-left">
+        <div class="logo">Linux Handbuch</div>
+        <ul class="nav-list" id="nav-list"></ul>
+    </nav>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="search-box">
+                <input type="text" placeholder="Befehl suchen ... z.B. grep, chmod">
+            </div>
+        </header>
+
+        <section class="content-area" id="content-area"></section>
+
+        <footer class="bottombar">
+            <a href="#" class="nav-button-prev" id="btn-prev">
+                <span class="icon">←</span>
+                <span id="prev-label">cd</span>
+            </a>
+
+            <span class="progress-text" id="progress-text"></span>
+
+            <a href="#" class="nav-button-next" id="btn-next">
+                <span id="next-label">pwd</span>
+                <span class="icon">→</span>
+            </a>
+        </footer>
+    </main>
+
+    <aside class="sidebar-right">
+        <h3>Befehle</h3>
+        <ul class="toc-list" id="toc-list"></ul>
+        <div class="sidebar-right-footer">
+            Huber, Förderer, Letaief
+        </div>
+    </aside>
+</div>
+
+<script src="content.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
